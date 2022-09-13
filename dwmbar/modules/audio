@@ -1,0 +1,39 @@
+#!/bin/bash
+
+function get_audio() {
+	
+	percent=$(pacmd list-sinks|grep -A 15 '* index'| awk '/volume: front/{ print $5 }' | sed 's/[%|,]//g')
+	
+	case $percent in
+		0)
+			output=ﱝ
+		;;
+		[0-9]|[1-4][0-9])
+			output=奄
+		;;
+		[5-9][0-9])
+			output=奔
+		;;
+		*)
+			output=墳
+	esac
+
+	case $(pacmd list-sinks|grep -A 15 '* index'|awk '/muted:/{ print $2 }') in
+		yes)
+			output= 
+		;;
+	esac
+
+	case $(pacmd list-sources|grep -A 15 '* index'|awk '/muted:/{ print $2 }') in
+		yes)
+			input=
+		;;
+		no)
+			input=
+		;;
+	esac
+
+	echo "$input $output $percent"
+}
+
+get_audio

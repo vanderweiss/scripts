@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function get_ram() {
+	
+	meminfo=($(cat /proc/meminfo))
+	total=$(bc <<< "scale=1;${meminfo[1]}/1024^2") ; available=$(bc <<< "scale=1;${meminfo[7]}/1024^2")
+	delta=$(bc <<< "(${total}-${available})") && [ ${delta::1} == '.' ] && delta="0${delta}"
+	echo " ${delta}/${total}GB"
+}
+
+get_ram

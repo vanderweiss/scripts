@@ -1,0 +1,26 @@
+#!/bin/bash
+
+CACHE=$HOME/
+
+function get_cpu() {
+
+	last_stat=($(head -n1 /proc/stat))
+	last_values=${last_stat[@]:1}
+	last_sum=$((${last_values// /+}))
+
+	sleep 0.1
+
+	stat=($(head -n1 /proc/stat))
+	values=${stat[@]:1}
+	sum=$((${values// /+}))
+
+	delta=$((sum - last_sum))
+	idle=$((stat[4] - last_stat[4]))
+	usage=$((delta - idle))
+	
+	percent=$((100 * usage / delta))
+
+	echo " ${percent}%"
+}
+
+get_cpu

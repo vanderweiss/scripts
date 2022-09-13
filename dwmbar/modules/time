@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function get_time() {
+	
+	hour=$(date +'%H:%M')
+	date=$(date +'%a %m/%d')
+
+	echo " $date $hour"
+}
+
+get_time

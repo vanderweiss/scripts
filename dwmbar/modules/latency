@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DOMAIN=www.google.com
+
+function get_latency() {
+
+	raw=$(ping -vqc 1 -w 1 $DOMAIN)
+	values=(${raw#*=})
+	delay=${values%%.*}
+	
+	echo " ${delay}ms"
+}
+
+get_latency

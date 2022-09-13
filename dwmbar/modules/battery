@@ -1,0 +1,62 @@
+#!/bin/bash
+
+INDEX=$(ls /sys/class/power_supply | grep BAT)
+
+function get_battery() {
+
+	case $(cat /sys/class/power_supply/$INDEX/status) in
+		Full)
+			charge=
+		;;
+		Charging)
+			charge=
+		;;
+		Discharging)
+			charge=
+		;;
+		Unknown)
+			charge=
+		;;
+	esac
+
+	case ${percent:=$(cat /sys/class/power_supply/$INDEX/capacity)} in
+		[0-9])
+			power=
+		;;
+		1[0-9])
+			power=
+		;;
+		2[0-9])
+			power=
+		;;
+		3[0-9])
+			power=
+		;;
+		4[0-9])
+			power=
+		;;
+		5[0-9])
+			power=
+		;;
+		6[0-9])
+			power=
+		;;
+		7[0-9])
+			power=
+		;;
+		8[0-9])
+			power=
+		;;
+		9[0-9])
+			power=
+		;;
+		100)
+			power=
+		;;
+
+	esac
+
+	echo "${charge}${power}"
+}
+
+get_battery

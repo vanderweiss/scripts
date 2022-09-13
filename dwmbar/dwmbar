@@ -1,0 +1,30 @@
+#!/bin/bash
+
+MODULES=('battery' 'audio' 'latency' 'temperature' 'cpu' 'ram' 'time')
+SEPARATOR=''
+DELAY=1
+
+function status() {
+	
+	declare bar
+	
+	for module in ${MODULES[@]}
+	do
+		value=$(exec $HOME/.dwm/modules/$module)
+		bar+="[${value}]"
+
+		[ $module != ${MODULES[-1]} ] && bar+=$SEPARATOR
+	done
+	
+	echo $bar
+}
+
+function run() {
+
+	while :; do 
+		xsetroot -name "$(status)"
+		sleep $DELAY
+	done
+}
+
+run

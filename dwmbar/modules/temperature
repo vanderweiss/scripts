@@ -1,0 +1,29 @@
+#!/bin/bash
+
+ZONE=$((--$(cat /sys/class/thermal/thermal_zone*/type | grep -n x86_pkg_temp | cut -c1)))
+
+function get_temperature() {
+	
+	case ${celsius:=$(head -c2 /sys/class/thermal/thermal_zone$(($ZONE - 1))/temp)} in
+		[0-9]|[1-2][0-9])
+			temp=
+		;;
+		3[0-9])
+			temp=
+		;;
+		4[0-9])
+			temp=
+		;;
+		5[0-9])
+			temp=
+		;;
+		*)
+			temp=
+		;;
+
+	esac
+	
+	echo "$temp ${celsius}糖"
+}
+
+get_temperature
