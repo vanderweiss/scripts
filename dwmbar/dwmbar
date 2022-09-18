@@ -10,7 +10,7 @@ function status() {
 	
 	for module in ${MODULES[@]}
 	do
-		value=$(exec $HOME/.dwm/modules/$module)
+		value=$(exec $(pwd)/modules/${module})
 		bar+="[${value}]"
 
 		[ $module != ${MODULES[-1]} ] && bar+=$SEPARATOR
