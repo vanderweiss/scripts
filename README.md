@@ -1,2 +1,2 @@
 # scripts
-owo
+owo hi
