@@ -1,2 +1,2 @@
 # scripts
-owosaw hi
+script kid omg wtf OMG
